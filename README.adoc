@@ -1,3 +1,56 @@
-# Learning Miscellaneous
+= Learning Miscellaneous
 
 On this repo I put learning which don't fit into any of my other learning repos yet.
+
+== Maven
+
+=== Verify Maven settings
+
+[source,bash]
+----
+mvn help:effective-settings
+----
+
+== GIT
+
+[source,bash]
+----
+# Generate the key, if you press enter as the passphrase, you won't have a passphrase
+ssh-keygen -t rsa -b 2048 -C "some comment e.g. email"
+
+eval "$(ssh-agent -s)"
+ssh-add -K ~/.ssh/id_ed25519
+
+# Copy the public key content into the clipboard
+tr -d '\n' < ~/.ssh/id_rsa.pub | pbcopy
+
+# Add the key to your GitHub account
+
+# Verify connection
+ssh -T git@github.com
+----
+
+
+=== Using different key per repo
+
+You might have two different GitHub accounts and want to use different keys for them, e.g. work and private.
+
+. Create an ssh config file: `touch ~/.ssh/config`
+. Add the following:
++
+[source,bash]
+----
+Host github-as-haisi
+HostName github.com
+User git
+IdentityFile ~/.ssh/some-private-key
+IdentitiesOnly yes
+----
+. Use the definied host name (here *github-as-haisi*) for URI of repository:
++
+[source,bash]
+----
+git remote add git@github-as-haisi:haisi/dotfiles.git
+# vs
+git remote add git@github.com:haisi/dotfiles.git
+----
