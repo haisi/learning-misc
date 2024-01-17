@@ -54,3 +54,11 @@ git remote add git@github-as-haisi:haisi/dotfiles.git
 # vs
 git remote add git@github.com:haisi/dotfiles.git
 ----
+
+=== Use ansible to encrypt files
+
+[source,bash]
+----
+ansible-vault encrypt my-ssh-private-key
+ansible-vault decrypt  my-ssh-private-key
+----
